@@ -31,6 +31,20 @@ public:
     void insert(T &elem);
     T&   operator[](size_t index);
     size_t size() const { return m_count; }
+    
+    // COMPLETADO (Nivel 2): Operador << para imprimir el vector
+    friend std::ostream& operator<<(std::ostream& os, const CVector& vec) {
+        os << "[";
+        for (size_t i = 0; i < vec.m_count; ++i) {
+            os << vec.m_pVect[i];
+            if (i < vec.m_count - 1) {
+                os << ", ";
+            }
+        }
+        os << "]";
+        return os;
+    }
+    
 private:
     void resize();
     void Init(size_t n);
@@ -115,15 +129,6 @@ T& CVector<T>::operator[](size_t index) {
         throw std::out_of_range("Index out of range");
     }
     return m_pVect[index];
-}
-
-template <typename T>
-std::ostream& operator<<(std::ostream& os, CVector<T>& vec) {
-    // os << "[";
-    for (size_t i = 0; i < vec.size(); ++i)
-        os << vec[i] << " ";
-    // os << "]";
-    return os;
 }
 
 #endif // __VECTOR_H__
